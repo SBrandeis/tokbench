@@ -9,10 +9,12 @@ description = "tokbench engine: HuggingFace tokenizers — the baseline and the 
 [dependencies]
 tokbench-core.workspace = true
 
-# Pinned, not floated. A benchmark number without an exact version is not a
+# 0.23.1, the previous pin, had bugs that made it a poor oracle; 0.23.3 is
+# Python-only, so 0.23.2 is the latest Rust release. Pinned, not floated: a
+# benchmark number without an exact version is not a
 # result, and a silent minor bump would silently move the baseline every other
 # engine is compared against.
-tokenizers = { version = "=0.23.1", default-features = false, features = ["onig"] }
+tokenizers = { version = "=0.23.2", default-features = false, features = ["onig"] }
 
 # Not a second implementation of the engine's parallelism -- the opposite. `tokenizers`
 # parallelises `encode_batch` over rayon's *current* pool, so sizing that pool is how its

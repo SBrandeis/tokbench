@@ -10,7 +10,7 @@ pub struct Adapter {
 impl Build for Adapter {
     fn build_without_cache(_model: &Model) -> Result<Box<dyn Engine>, Unsupported> {
         Err(Unsupported(
-            "0.23.1 takes cache_capacity only through BpeBuilder, and the field is not in the \
+            "0.23.2 takes cache_capacity only through BpeBuilder, and the field is not in the \
              model config, so from_file cannot ask for it"
                 .into(),
         ))
@@ -38,7 +38,7 @@ impl Engine for Adapter {
     fn info(&self) -> Info {
         Info {
             name: "hf-tokenizers",
-            version: "0.23.1",
+            version: "0.23.2",
             lang: "rust",
             class: Class::Native,
             url: "https://github.com/huggingface/tokenizers",
