@@ -58,6 +58,7 @@ rust-engines = [
     "hf-tokenizers",
     "hf-tokenizers-0-21",
     "pipeline",
+    "pipeline-rc3",
     "kitoken",
     "fastokens",
     "tokie",

@@ -166,6 +166,11 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "5e764a1d40d510daf35e07be9eb06e75770908c27d411ee6c92109c9840eaaf7"
 
 [[package]]
+name = "bitcannon"
+version = "0.1.0-rc.3"
+source = "git+https://github.com/huggingface/tokenizers?rev=f8f41813f4bf8f3e2a467e31637c8837373b8dfa#f8f41813f4bf8f3e2a467e31637c8837373b8dfa"
+
+[[package]]
 name = "bitcanon"
 version = "0.1.0-rc.0"
 source = "git+https://github.com/huggingface/tokenizers?rev=484be1d3351077fc5c0b81e876c94814c08ef3eb#484be1d3351077fc5c0b81e876c94814c08ef3eb"
@@ -1906,9 +1911,9 @@ dependencies = [
 
 [[package]]
 name = "ptr_hash"
-version = "2.0.2"
+version = "2.1.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9f184d2c69ac0853853275df42e7160a7dc4f3248d93434002c28de27ed3f6d0"
+checksum = "b63ee8dbcb6f9b59d61bd20c10e1e95357e4ec44868e6fa51cfe1cefa3419afc"
 dependencies = [
  "bitvec",
  "colored",
@@ -1920,9 +1925,7 @@ dependencies = [
  "prefetch-index",
  "rand 0.10.2",
  "rand_chacha 0.10.0",
- "rayon",
  "rdst",
- "serde",
  "tempfile",
  "xxhash-rust",
 ]
@@ -2051,7 +2054,6 @@ dependencies = [
  "block-pseudorand",
  "criterion",
  "partition",
- "rayon",
  "tikv-jemallocator",
  "voracious_radix_sort",
 ]
@@ -2403,7 +2405,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "32497e9a4c7b38532efcdebeef879707aa9f794296a4f0244f6f69e9bc8574bd"
 dependencies = [
  "fastrand",
- "getrandom 0.4.3",
+ "getrandom 0.3.4",
  "once_cell",
  "rustix",
  "windows-sys",
@@ -2541,6 +2543,16 @@ dependencies = [
 
 [[package]]
 name = "tk-convert"
+version = "0.1.0-rc.3"
+source = "git+https://github.com/huggingface/tokenizers?rev=f8f41813f4bf8f3e2a467e31637c8837373b8dfa#f8f41813f4bf8f3e2a467e31637c8837373b8dfa"
+dependencies = [
+ "bitcannon",
+ "serde_json",
+ "thiserror 2.0.19",
+]
+
+[[package]]
+name = "tk-convert"
 version = "1.0.0-rc.0"
 source = "git+https://github.com/huggingface/tokenizers?rev=199d9a1338b1ffe672549f4dd80be49af13fab92#199d9a1338b1ffe672549f4dd80be49af13fab92"
 dependencies = [
@@ -2570,6 +2582,30 @@ dependencies = [
  "thiserror 2.0.19",
  "unicode-normalization",
  "unicode-normalization-alignments",
+ "unicode-segmentation",
+ "unicode_categories",
+ "wide",
+ "yada",
+]
+
+[[package]]
+name = "tk-encode"
+version = "0.1.0-rc.3"
+source = "git+https://github.com/huggingface/tokenizers?rev=f8f41813f4bf8f3e2a467e31637c8837373b8dfa#f8f41813f4bf8f3e2a467e31637c8837373b8dfa"
+dependencies = [
+ "ahash",
+ "bitcannon",
+ "dary_heap",
+ "libc",
+ "log",
+ "memchr",
+ "ptr_hash",
+ "rand 0.10.2",
+ "rayon",
+ "rayon-cond",
+ "spm_precompiled",
+ "thiserror 2.0.19",
+ "unicode-normalization",
  "unicode-segmentation",
  "unicode_categories",
  "wide",
@@ -2612,6 +2648,17 @@ dependencies = [
  "bitcanon",
  "hifijson",
  "tk-encode 0.1.0-rc.0",
+]
+
+[[package]]
+name = "tk-serialize"
+version = "0.1.0-rc.3"
+source = "git+https://github.com/huggingface/tokenizers?rev=f8f41813f4bf8f3e2a467e31637c8837373b8dfa#f8f41813f4bf8f3e2a467e31637c8837373b8dfa"
+dependencies = [
+ "base64 0.22.1",
+ "bitcannon",
+ "hifijson",
+ "tk-encode 0.1.0-rc.3",
 ]
 
 [[package]]
@@ -2662,6 +2709,7 @@ dependencies = [
  "tokbench-kitoken",
  "tokbench-llamacpp",
  "tokbench-pipeline",
+ "tokbench-pipeline-rc3",
  "tokbench-rust-gems-bpe",
  "tokbench-sentencepiece",
  "tokbench-tiktoken",
@@ -2763,6 +2811,17 @@ dependencies = [
  "tk-convert 1.0.0-rc.0",
  "tk-encode 1.0.0-rc.0",
  "tk-serialize 1.0.0-rc.0",
+ "tokbench-core",
+]
+
+[[package]]
+name = "tokbench-pipeline-rc3"
+version = "0.1.0"
+dependencies = [
+ "serde_json",
+ "tk-convert 0.1.0-rc.3",
+ "tk-encode 0.1.0-rc.3",
+ "tk-serialize 0.1.0-rc.3",
  "tokbench-core",
 ]
 
