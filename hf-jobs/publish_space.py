@@ -17,6 +17,7 @@ RUST_IMAGE = (
     "sha256:d0a4aa3ca2e1088ac0c81690914a0d810f2eee188197034edf366ed010a2b382"
 )
 HUB_VERSION = "1.29.0rc1"
+SOURCE_REPO = "huggingface/tokbench"
 GIGATOKEN_NIGHTLY = "nightly-2026-08-05"
 
 
@@ -27,7 +28,7 @@ def git(*args: str) -> str:
     return result.stdout.strip()
 
 
-def render_dockerfile(revision: str, gigatoken: bool = False) -> str:
+def render_dockerfile(revision: str, gigatoken: bool = False, source_repo: str = SOURCE_REPO) -> str:
     packages = "build-essential ca-certificates clang cmake git jq libssl-dev"
     if gigatoken:
         packages += " lld python3-dev"
@@ -62,7 +63,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \\
 COPY --from=uv /uv /uvx /usr/local/bin/
 
 WORKDIR /workspace
-RUN git clone https://github.com/huggingface/tokbench.git \\
+RUN git clone https://github.com/{source_repo}.git tokbench \\
     && cd tokbench \\
     && git checkout --detach {revision} \\
     && test \"$(git rev-parse HEAD)\" = \"{revision}\"
@@ -75,7 +76,7 @@ CMD [\"python3\", \"-m\", \"http.server\", \"7860\"]
 """
 
 
-def render_readme(revision: str, gigatoken: bool = False) -> str:
+def render_readme(revision: str, gigatoken: bool = False, source_repo: str = SOURCE_REPO) -> str:
     short = revision[:7]
     variant = " with Gigatoken" if gigatoken else ""
     return f"""---
@@ -89,7 +90,7 @@ app_port: 7860
 
 Private, commit-specific Docker image for reproducible tokbench Jobs{variant}.
 
-Tokbench source: https://github.com/huggingface/tokbench/tree/{revision}
+Tokbench source: https://github.com/{source_repo}/tree/{revision}
 """
 
 
@@ -102,6 +103,11 @@ def main() -> None:
         "--gigatoken",
         action="store_true",
         help="Build the pinned Gigatoken adapter with the required nightly toolchain",
+    )
+    parser.add_argument(
+        "--source-repo",
+        default=SOURCE_REPO,
+        help="GitHub owner/name to clone; use a fork for a commit that is not upstream yet",
     )
     args = parser.parse_args()
 
@@ -131,11 +137,11 @@ def main() -> None:
         operations=[
             CommitOperationAdd(
                 path_in_repo="Dockerfile",
-                path_or_fileobj=BytesIO(render_dockerfile(revision, args.gigatoken).encode()),
+                path_or_fileobj=BytesIO(render_dockerfile(revision, args.gigatoken, args.source_repo).encode()),
             ),
             CommitOperationAdd(
                 path_in_repo="README.md",
-                path_or_fileobj=BytesIO(render_readme(revision, args.gigatoken).encode()),
+                path_or_fileobj=BytesIO(render_readme(revision, args.gigatoken, args.source_repo).encode()),
             ),
         ],
     )
