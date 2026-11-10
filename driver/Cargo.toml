@@ -21,6 +21,8 @@ open = "5"
 tokbench-hf-tokenizers = { path = "../engines/hf-tokenizers", optional = true }
 tokbench-hf-tokenizers-0-21 = { path = "../engines/hf-tokenizers-0.21", optional = true }
 tokbench-pipeline = { path = "../engines/pipeline", optional = true }
+tokbench-pipeline-rc4 = { path = "../engines/pipeline-rc4", optional = true }
+tokbench-pipeline-rc3 = { path = "../engines/pipeline-rc3", optional = true }
 tokbench-kitoken = { path = "../engines/kitoken", optional = true }
 tokbench-fastokens = { path = "../engines/fastokens", optional = true }
 tokbench-tokie = { path = "../engines/tokie", optional = true }
@@ -41,6 +43,8 @@ default = ["hf-tokenizers"]
 hf-tokenizers = ["dep:tokbench-hf-tokenizers"]
 hf-tokenizers-0-21 = ["dep:tokbench-hf-tokenizers-0-21"]
 pipeline = ["dep:tokbench-pipeline"]
+pipeline-rc4 = ["dep:tokbench-pipeline-rc4"]
+pipeline-rc3 = ["dep:tokbench-pipeline-rc3"]
 kitoken = ["dep:tokbench-kitoken"]
 fastokens = ["dep:tokbench-fastokens"]
 tokie = ["dep:tokbench-tokie"]
@@ -58,6 +62,7 @@ rust-engines = [
     "hf-tokenizers",
     "hf-tokenizers-0-21",
     "pipeline",
+    "pipeline-rc4",
     "pipeline-rc3",
     "kitoken",
     "fastokens",
