@@ -1,0 +1,63 @@
+[package]
+name = "tokbench-pipeline-rc3"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "tokbench engine: the HuggingFace 1.0.0-rc.3 pipeline (tk-encode + tk-serialize)."
+
+[dependencies]
+tokbench-core.workspace = true
+serde_json.workspace = true
+
+# `tokenizers-rc0` — the 1.0.0-rc.0 line. Pinned by REV, not by branch:
+# the previous pin here was `branch = "poc/target-encode"`, and a branch pin is
+# what let this engine silently keep measuring a decode path that the branch had
+# since replaced. A rev is reproducible, and a stale rev is at least visible.
+#
+# Repinning from the #2279 POC to rc0 is not a version bump, it is a different
+# engine: the legacy `tk_encode::Tokenizer` no longer exists, so the adapter is
+# rewritten around `PipelineTokenizer`. Every number this engine reports —
+# encode as well as decode — is re-baselined by that change.
+#
+# tk-encode is edition 2024, so this engine needs a recent toolchain; the rest
+# of the workspace does not.
+tk-encode = { git = "https://github.com/huggingface/tokenizers", rev = "f8f41813f4bf8f3e2a467e31637c8837373b8dfa", package = "tk-encode", default-features = false, features = [
+  "parallelism",
+  "normalizers",
+  "unicode-scripts",
+  "bpe",
+  "unigram",
+  "wordpiece",
+  "wordlevel",
+] }
+
+# The reader. rc0 has no `Tokenizer::from_file`: building a `PipelineTokenizer`
+# from a `tokenizer.json` is this crate's whole job, and it links no serde.
+#
+# `parallelism` IS enabled, on both crates, and that is a reversal worth stating.
+# It used to be off so the headline stayed a single-thread number. But the scaling
+# sweep now drives each engine's own pool (see `core::measure_scaling`), and an
+# engine compiled without its pool can only be threaded from outside -- which is
+# the measurement bug this engine existed to avoid.
+#
+# The headline single-text number is unaffected: `encode_flat` requires
+# `documents.len() > 1`, so one document is never fanned out however many
+# threads the pool has. `Info::internally_parallel` is reported from the thread
+# count actually set, not hardcoded.
+tk-serialize = { git = "https://github.com/huggingface/tokenizers", rev = "f8f41813f4bf8f3e2a467e31637c8837373b8dfa", package = "tk-serialize", default-features = false, features = [
+  "parallelism",
+  "deserialize",
+  "normalizers",
+  "unicode-scripts",
+  "bpe",
+  "unigram",
+  "wordpiece",
+  "wordlevel",
+] }
+
+# The upgrade pass. Every `tokenizer.json` in `data/models` is still version
+# 1.0, and rc0's reader is canonical-only (`version: "2.0"`) by design, so a
+# legacy config has to go through here first. This is exactly what upstream's
+# own `tk-serialize` benches do, and it runs at load time, outside the timer.
+tk-convert = { git = "https://github.com/huggingface/tokenizers", rev = "f8f41813f4bf8f3e2a467e31637c8837373b8dfa", package = "tk-convert" }
