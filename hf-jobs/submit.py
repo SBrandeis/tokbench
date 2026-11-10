@@ -86,7 +86,7 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--engines", help="Comma-separated engine allowlist")
     parser.add_argument(
         "--measure",
-        choices=("encode", "decode", "latency", "scaling"),
+        choices=("encode", "decode", "latency", "scaling", "memory"),
         help="Run one atomic measurement family instead of the complete suite",
     )
     parser.add_argument(
@@ -95,6 +95,7 @@ def parse_args() -> argparse.Namespace:
     )
     parser.add_argument("--no-decode", action="store_true")
     parser.add_argument("--latency", help="Comma-separated latency corpora")
+    parser.add_argument("--memory-corpus", help="The one corpus for --measure memory")
     parser.add_argument("--latency-bytes", type=int, default=512)
     parser.add_argument("--latency-samples", type=int, default=1_000)
     parser.add_argument(
@@ -247,6 +248,7 @@ def main() -> None:
         "TOKBENCH_NO_DECODE": benchmark["no_decode"],
         "TOKBENCH_PIN_PHYSICAL_CORES": benchmark["pin_physical_cores"],
         "TOKBENCH_LATENCY": benchmark["latency"],
+        "TOKBENCH_MEMORY_CORPUS": args.memory_corpus or "",
         "TOKBENCH_LATENCY_BYTES": str(args.latency_bytes),
         "TOKBENCH_LATENCY_SAMPLES": str(args.latency_samples),
         "TOKBENCH_CACHE_CAPACITY": benchmark["cache_capacity"],

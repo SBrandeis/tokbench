@@ -26,6 +26,7 @@ max_threads="${TOKBENCH_MAX_THREADS:-8}"
 no_decode="${TOKBENCH_NO_DECODE:-0}"
 pin_physical_cores="${TOKBENCH_PIN_PHYSICAL_CORES:-0}"
 latency_csv="${TOKBENCH_LATENCY:-}"
+memory_corpus="${TOKBENCH_MEMORY_CORPUS:-}"
 latency_bytes="${TOKBENCH_LATENCY_BYTES:-512}"
 latency_samples="${TOKBENCH_LATENCY_SAMPLES:-1000}"
 cache_capacity="${TOKBENCH_CACHE_CAPACITY:-}"
@@ -41,8 +42,8 @@ done
   || { echo "TOKBENCH_PIN_PHYSICAL_CORES must be 0 or 1" >&2; exit 2; }
 [[ "${skip_build}" == 0 || "${skip_build}" == 1 ]] \
   || { echo "TOKBENCH_SKIP_BUILD must be 0 or 1" >&2; exit 2; }
-[[ -z "${measure}" || "${measure}" =~ ^(encode|decode|latency|scaling)$ ]] \
-  || { echo "TOKBENCH_MEASURE must be encode, decode, latency or scaling" >&2; exit 2; }
+[[ -z "${measure}" || "${measure}" =~ ^(encode|decode|latency|scaling|memory)$ ]] \
+  || { echo "TOKBENCH_MEASURE must be encode, decode, latency, scaling or memory" >&2; exit 2; }
 [[ -z "${compare_to}" || "${compare_to}" =~ ^[A-Za-z0-9._-]+$ ]] \
   || { echo "invalid TOKBENCH_COMPARE_TO: ${compare_to}" >&2; exit 2; }
 [[ -z "${compare_to}" || -n "${measure}" ]] \
@@ -119,6 +120,12 @@ if [[ -n "${measure}" ]]; then
     for item in "${scaling_items[@]}"; do
       [[ -n "${item}" ]] && args+=(--corpus "${item}")
     done
+  fi
+  if [[ "${measure}" == memory ]]; then
+    # `measure memory` takes exactly one corpus.
+    [[ -n "${memory_corpus}" ]] \
+      || { echo "TOKBENCH_MEASURE=memory requires TOKBENCH_MEMORY_CORPUS" >&2; exit 2; }
+    args+=(--corpus "${memory_corpus}")
   fi
   if [[ "${measure}" == latency ]]; then
     args+=(--latency-bytes "${latency_bytes}" --latency-samples "${latency_samples}")
