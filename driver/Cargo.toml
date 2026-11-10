@@ -19,6 +19,7 @@ open = "5"
 # Every engine is optional so the workspace builds with no system libraries
 # present, and one broken third-party build cannot block the rest of the matrix.
 tokbench-hf-tokenizers = { path = "../engines/hf-tokenizers", optional = true }
+tokbench-hf-tokenizers-0-21 = { path = "../engines/hf-tokenizers-0.21", optional = true }
 tokbench-pipeline = { path = "../engines/pipeline", optional = true }
 tokbench-kitoken = { path = "../engines/kitoken", optional = true }
 tokbench-fastokens = { path = "../engines/fastokens", optional = true }
@@ -38,6 +39,7 @@ tokbench-executorch = { path = "../engines/executorch", optional = true }
 default = ["hf-tokenizers"]
 
 hf-tokenizers = ["dep:tokbench-hf-tokenizers"]
+hf-tokenizers-0-21 = ["dep:tokbench-hf-tokenizers-0-21"]
 pipeline = ["dep:tokbench-pipeline"]
 kitoken = ["dep:tokbench-kitoken"]
 fastokens = ["dep:tokbench-fastokens"]
@@ -54,6 +56,7 @@ executorch = ["dep:tokbench-executorch"]
 # No system libraries: builds anywhere cargo does, and is what CI runs.
 rust-engines = [
     "hf-tokenizers",
+    "hf-tokenizers-0-21",
     "pipeline",
     "kitoken",
     "fastokens",
