@@ -5,6 +5,7 @@ members = [
     "driver",
     "binsize",
     "engines/hf-tokenizers",
+    "engines/hf-tokenizers-0.21",
     "engines/pipeline",
     "engines/kitoken",
     "engines/fastokens",
