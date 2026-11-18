@@ -33,6 +33,12 @@ pub fn native() -> Vec<(&'static str, Ctor)> {
         tokbench_hf_tokenizers::Adapter
     );
     engine!(v, "pipeline", "pipeline", tokbench_pipeline::Adapter);
+    engine!(
+        v,
+        "pipeline-base",
+        "pipeline-base",
+        tokbench_pipeline_base::Adapter
+    );
     engine!(v, "kitoken", "kitoken", tokbench_kitoken::Adapter);
     engine!(v, "fastokens", "fastokens", tokbench_fastokens::Adapter);
     engine!(v, "tokie", "tokie", tokbench_tokie::Adapter);

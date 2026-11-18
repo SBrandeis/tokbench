@@ -1,0 +1,33 @@
+[package]
+name = "tokbench-pipeline-base"
+version = "0.1.0"
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+description = "tokbench engine: the pipeline adapter at a second tokenizers revision, the base of an A/B."
+
+# Same adapter and features as engines/pipeline, at the base revision of an A/B.
+# hf-jobs/pin_pipeline.py rewrites the revision in both.
+[dependencies]
+tokbench-core.workspace = true
+serde_json.workspace = true
+tk-encode = { git = "https://github.com/huggingface/tokenizers", rev = "76f57f25a39f139d92ae861db950b7830951e6d2", package = "tk-encode", default-features = false, features = [
+  "parallelism",
+  "normalizers",
+  "unicode-scripts",
+  "bpe",
+  "unigram",
+  "wordpiece",
+  "wordlevel",
+] }
+tk-serialize = { git = "https://github.com/huggingface/tokenizers", rev = "76f57f25a39f139d92ae861db950b7830951e6d2", package = "tk-serialize", default-features = false, features = [
+  "parallelism",
+  "deserialize",
+  "normalizers",
+  "unicode-scripts",
+  "bpe",
+  "unigram",
+  "wordpiece",
+  "wordlevel",
+] }
+tk-convert = { git = "https://github.com/huggingface/tokenizers", rev = "76f57f25a39f139d92ae861db950b7830951e6d2", package = "tk-convert" }

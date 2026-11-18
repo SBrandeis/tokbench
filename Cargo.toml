@@ -6,6 +6,7 @@ members = [
     "binsize",
     "engines/hf-tokenizers",
     "engines/pipeline",
+    "engines/pipeline-base",
     "engines/kitoken",
     "engines/fastokens",
     "engines/tokie",

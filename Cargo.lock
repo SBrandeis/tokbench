@@ -2585,6 +2585,7 @@ dependencies = [
  "tokbench-kitoken",
  "tokbench-llamacpp",
  "tokbench-pipeline",
+ "tokbench-pipeline-base",
  "tokbench-rust-gems-bpe",
  "tokbench-sentencepiece",
  "tokbench-tiktoken",
@@ -2680,6 +2681,17 @@ dependencies = [
 
 [[package]]
 name = "tokbench-pipeline"
+version = "0.1.0"
+dependencies = [
+ "serde_json",
+ "tk-convert",
+ "tk-encode",
+ "tk-serialize",
+ "tokbench-core",
+]
+
+[[package]]
+name = "tokbench-pipeline-base"
 version = "0.1.0"
 dependencies = [
  "serde_json",

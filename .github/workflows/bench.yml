@@ -34,10 +34,10 @@ jobs:
         run: cargo test -p tokbench-core
 
       - name: build all Rust engines
-        run: cargo check -p tokbench --features rust-engines --all-targets
+        run: cargo check -p tokbench --features rust-engines,pipeline-base --all-targets
 
       - name: clippy
-        run: cargo clippy -p tokbench-core -p tokbench --features rust-engines --all-targets -- -D warnings
+        run: cargo clippy -p tokbench-core -p tokbench --features rust-engines,pipeline-base --all-targets -- -D warnings
 
       - name: fmt
         run: cargo fmt --all -- --check

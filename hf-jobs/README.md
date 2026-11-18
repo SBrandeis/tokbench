@@ -16,6 +16,31 @@ each of eight distinct physical cores. This keeps the 1/2/4/8-thread scaling
 sweep off sibling SMT threads. The selected CPU set and effective task affinity
 are recorded in the environment manifest.
 
+## A/B two tokenizers commits
+
+One command measures a tip against a base, in one Job, with no image to build:
+
+```bash
+python hf-jobs/ab.py --base main --tip pull/2711/head --models gpt2,llama-3
+```
+
+`--base` and `--tip` take a commit, branch, tag or `pull/N/head` of
+`huggingface/tokenizers` (`--repo` for a fork) and are resolved to SHAs before
+submission, as are the two dataset revisions. The Job clones tokbench at the
+local HEAD, which must be pushed (`--tokbench-repo` for a fork), pins the
+`pipeline` engine to the tip and `pipeline-base` to the base with
+`hf-jobs/pin_pipeline.py`, builds both into one binary and runs `measure
+encode` with the reference engine verifying the ids.
+
+The Job log ends with the tip/base ratio of every cell, paired within each
+run, as the median and range across runs. With `--bucket` the reports, that
+table and the resolved `Cargo.lock` are also written to `/outputs/$JOB_ID/`.
+
+Run the same commit as both arms for the A/A control: its ranges are the noise
+floor of the Job, and a real A/B ratio inside them is not a result. Both arms
+share one adapter, `engines/pipeline/src/adapter.rs`, so two commits whose API
+differs there cannot be compared this way.
+
 ## Publish a commit-specific Docker Space
 
 Push the tokbench commit first, then create a private Docker Space from the

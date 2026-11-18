@@ -20,6 +20,7 @@ open = "5"
 # present, and one broken third-party build cannot block the rest of the matrix.
 tokbench-hf-tokenizers = { path = "../engines/hf-tokenizers", optional = true }
 tokbench-pipeline = { path = "../engines/pipeline", optional = true }
+tokbench-pipeline-base = { path = "../engines/pipeline-base", optional = true }
 tokbench-kitoken = { path = "../engines/kitoken", optional = true }
 tokbench-fastokens = { path = "../engines/fastokens", optional = true }
 tokbench-tokie = { path = "../engines/tokie", optional = true }
@@ -39,6 +40,9 @@ default = ["hf-tokenizers"]
 
 hf-tokenizers = ["dep:tokbench-hf-tokenizers"]
 pipeline = ["dep:tokbench-pipeline"]
+# The base arm of an A/B (hf-jobs/ab.py). Not in rust-engines: at the same
+# revision as pipeline it is the same code twice.
+pipeline-base = ["dep:tokbench-pipeline-base"]
 kitoken = ["dep:tokbench-kitoken"]
 fastokens = ["dep:tokbench-fastokens"]
 tokie = ["dep:tokbench-tokie"]
