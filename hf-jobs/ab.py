@@ -13,8 +13,6 @@ import argparse
 import json
 import os
 import subprocess
-import urllib.error
-import urllib.request
 
 from publish_space import HUB_VERSION, RUST_IMAGE, UV_IMAGE
 
@@ -25,15 +23,15 @@ UV_VERSION = UV_IMAGE.split(":")[1].split("@")[0]
 
 def resolve(repo: str, ref: str) -> str:
     """Full SHA of a branch, tag, `pull/N/head` or short SHA on GitHub."""
-    request = urllib.request.Request(
+    import httpx  # ships with huggingface_hub, and brings its own CA bundle
+
+    response = httpx.get(
         f"https://api.github.com/repos/{repo}/commits/{ref}",
         headers={"Accept": "application/vnd.github.sha"},
     )
-    try:
-        with urllib.request.urlopen(request) as response:
-            return response.read().decode().strip()
-    except urllib.error.HTTPError as error:
-        raise SystemExit(f"cannot resolve {ref} in {repo}: {error}") from error
+    if response.status_code != 200:
+        raise SystemExit(f"cannot resolve {ref} in {repo}: HTTP {response.status_code}")
+    return response.text.strip()
 
 
 def job_spec(args, *, tokbench_rev, base, tip, input_rev, corpora_rev) -> dict:
