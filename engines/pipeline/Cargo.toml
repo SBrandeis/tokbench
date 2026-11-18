@@ -22,7 +22,7 @@ serde_json.workspace = true
 #
 # tk-encode is edition 2024, so this engine needs a recent toolchain; the rest
 # of the workspace does not.
-tk-encode = { git = "https://github.com/huggingface/tokenizers", rev = "76f57f25a39f139d92ae861db950b7830951e6d2", package = "tk-encode", default-features = false, features = [
+tk-encode = { git = "https://github.com/huggingface/tokenizers", rev = "109a9970656d94a424893b356179ef3070bbb74b", package = "tk-encode", default-features = false, features = [
   "parallelism",
   "normalizers",
   "unicode-scripts",
@@ -45,7 +45,7 @@ tk-encode = { git = "https://github.com/huggingface/tokenizers", rev = "76f57f25
 # `documents.len() > 1`, so one document is never fanned out however many
 # threads the pool has. `Info::internally_parallel` is reported from the thread
 # count actually set, not hardcoded.
-tk-serialize = { git = "https://github.com/huggingface/tokenizers", rev = "76f57f25a39f139d92ae861db950b7830951e6d2", package = "tk-serialize", default-features = false, features = [
+tk-serialize = { git = "https://github.com/huggingface/tokenizers", rev = "109a9970656d94a424893b356179ef3070bbb74b", package = "tk-serialize", default-features = false, features = [
   "parallelism",
   "deserialize",
   "normalizers",
@@ -60,4 +60,4 @@ tk-serialize = { git = "https://github.com/huggingface/tokenizers", rev = "76f57
 # 1.0, and the v1 reader is canonical-only (`version: "2.0"`) by design, so a
 # legacy config has to go through here first. This is exactly what upstream's
 # own `tk-serialize` benches do, and it runs at load time, outside the timer.
-tk-convert = { git = "https://github.com/huggingface/tokenizers", rev = "76f57f25a39f139d92ae861db950b7830951e6d2", package = "tk-convert" }
+tk-convert = { git = "https://github.com/huggingface/tokenizers", rev = "109a9970656d94a424893b356179ef3070bbb74b", package = "tk-convert" }

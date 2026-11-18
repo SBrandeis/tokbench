@@ -168,7 +168,17 @@ checksum = "5e764a1d40d510daf35e07be9eb06e75770908c27d411ee6c92109c9840eaaf7"
 [[package]]
 name = "bitcannon"
 version = "0.1.0-dev.2"
+source = "git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b#109a9970656d94a424893b356179ef3070bbb74b"
+
+[[package]]
+name = "bitcannon"
+version = "0.1.0-dev.2"
 source = "git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2#76f57f25a39f139d92ae861db950b7830951e6d2"
+
+[[package]]
+name = "bitcannon"
+version = "0.1.0-dev.2"
+source = "git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12#d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12"
 
 [[package]]
 name = "bitflags"
@@ -2512,11 +2522,55 @@ checksum = "1f3ccbac311fea05f86f61904b462b55fb3df8837a366dfc601a0161d0532f20"
 [[package]]
 name = "tk-convert"
 version = "0.1.0-dev.2"
-source = "git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2#76f57f25a39f139d92ae861db950b7830951e6d2"
+source = "git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b#109a9970656d94a424893b356179ef3070bbb74b"
 dependencies = [
- "bitcannon",
+ "bitcannon 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b)",
  "serde_json",
  "thiserror 2.0.19",
+]
+
+[[package]]
+name = "tk-convert"
+version = "0.1.0-dev.2"
+source = "git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2#76f57f25a39f139d92ae861db950b7830951e6d2"
+dependencies = [
+ "bitcannon 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2)",
+ "serde_json",
+ "thiserror 2.0.19",
+]
+
+[[package]]
+name = "tk-convert"
+version = "0.1.0-dev.2"
+source = "git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12#d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12"
+dependencies = [
+ "bitcannon 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12)",
+ "serde_json",
+ "thiserror 2.0.19",
+]
+
+[[package]]
+name = "tk-encode"
+version = "0.1.0-dev.2"
+source = "git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b#109a9970656d94a424893b356179ef3070bbb74b"
+dependencies = [
+ "ahash",
+ "bitcannon 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b)",
+ "dary_heap",
+ "libc",
+ "log",
+ "memchr",
+ "ptr_hash",
+ "rand 0.10.2",
+ "rayon",
+ "rayon-cond",
+ "spm_precompiled",
+ "thiserror 2.0.19",
+ "unicode-normalization",
+ "unicode-segmentation",
+ "unicode_categories",
+ "wide",
+ "yada",
 ]
 
 [[package]]
@@ -2525,7 +2579,31 @@ version = "0.1.0-dev.2"
 source = "git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2#76f57f25a39f139d92ae861db950b7830951e6d2"
 dependencies = [
  "ahash",
- "bitcannon",
+ "bitcannon 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2)",
+ "dary_heap",
+ "libc",
+ "log",
+ "memchr",
+ "ptr_hash",
+ "rand 0.10.2",
+ "rayon",
+ "rayon-cond",
+ "spm_precompiled",
+ "thiserror 2.0.19",
+ "unicode-normalization",
+ "unicode-segmentation",
+ "unicode_categories",
+ "wide",
+ "yada",
+]
+
+[[package]]
+name = "tk-encode"
+version = "0.1.0-dev.2"
+source = "git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12#d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12"
+dependencies = [
+ "ahash",
+ "bitcannon 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12)",
  "dary_heap",
  "libc",
  "log",
@@ -2546,12 +2624,33 @@ dependencies = [
 [[package]]
 name = "tk-serialize"
 version = "0.1.0-dev.2"
-source = "git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2#76f57f25a39f139d92ae861db950b7830951e6d2"
+source = "git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b#109a9970656d94a424893b356179ef3070bbb74b"
 dependencies = [
  "base64 0.22.1",
- "bitcannon",
+ "bitcannon 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b)",
  "hifijson",
- "tk-encode",
+ "tk-encode 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b)",
+]
+
+[[package]]
+name = "tk-serialize"
+version = "0.1.0-dev.2"
+source = "git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2#76f57f25a39f139d92ae861db950b7830951e6d2"
+dependencies = [
+ "bitcannon 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2)",
+ "hifijson",
+ "tk-encode 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2)",
+]
+
+[[package]]
+name = "tk-serialize"
+version = "0.1.0-dev.2"
+source = "git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12#d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12"
+dependencies = [
+ "base64 0.22.1",
+ "bitcannon 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12)",
+ "hifijson",
+ "tk-encode 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12)",
 ]
 
 [[package]]
@@ -2563,7 +2662,7 @@ dependencies = [
  "log",
  "serde",
  "thiserror 2.0.19",
- "tk-encode",
+ "tk-encode 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2)",
 ]
 
 [[package]]
@@ -2585,6 +2684,7 @@ dependencies = [
  "tokbench-kitoken",
  "tokbench-llamacpp",
  "tokbench-pipeline",
+ "tokbench-pipeline-base",
  "tokbench-rust-gems-bpe",
  "tokbench-sentencepiece",
  "tokbench-tiktoken",
@@ -2597,9 +2697,9 @@ name = "tokbench-binsize"
 version = "0.1.0"
 dependencies = [
  "ahash",
- "tk-convert",
- "tk-encode",
- "tk-serialize",
+ "tk-convert 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2)",
+ "tk-encode 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2)",
+ "tk-serialize 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=76f57f25a39f139d92ae861db950b7830951e6d2)",
  "tk-train",
  "tokbench-core",
  "tokbench-executorch",
@@ -2683,9 +2783,20 @@ name = "tokbench-pipeline"
 version = "0.1.0"
 dependencies = [
  "serde_json",
- "tk-convert",
- "tk-encode",
- "tk-serialize",
+ "tk-convert 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b)",
+ "tk-encode 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b)",
+ "tk-serialize 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=109a9970656d94a424893b356179ef3070bbb74b)",
+ "tokbench-core",
+]
+
+[[package]]
+name = "tokbench-pipeline-base"
+version = "0.1.0"
+dependencies = [
+ "serde_json",
+ "tk-convert 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12)",
+ "tk-encode 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12)",
+ "tk-serialize 0.1.0-dev.2 (git+https://github.com/huggingface/tokenizers?rev=d704e6dfb73d8cc7024fb3dfc63f17ac28f27e12)",
  "tokbench-core",
 ]
 

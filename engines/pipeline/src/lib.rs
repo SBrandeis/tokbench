@@ -78,10 +78,10 @@ impl Engine for Adapter {
     fn info(&self) -> Info {
         Info {
             name: self.name,
-            version: "tk-encode 0.1.0-dev.2 (tokenizers main @ 76f57f25)",
+            version: "tk-encode 0.1.0-dev.2 (tokenizers main @ 109a9970)",
             lang: "rust",
             class: Class::Native,
-            url: "https://github.com/huggingface/tokenizers/tree/76f57f25a39f139d92ae861db950b7830951e6d2",
+            url: "https://github.com/huggingface/tokenizers/tree/109a9970656d94a424893b356179ef3070bbb74b",
             also_computes: "",
             internally_parallel: self.threads > 1,
         }
